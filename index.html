@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RedeKrush - Loja Oficial 30% OFF</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 10px rgba(168, 85, 247, 0.5), 0 0 20px rgba(236, 72, 153, 0.3); }
+            50% { text-shadow: 0 0 20px rgba(168, 85, 247, 0.8), 0 0 40px rgba(236, 72, 153, 0.5); }
+        }
+
+        @keyframes pulse-border {
+            0%, 100% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.3), inset 0 0 20px rgba(168, 85, 247, 0.1); }
+            50% { box-shadow: 0 0 40px rgba(236, 72, 153, 0.5), inset 0 0 30px rgba(168, 85, 247, 0.2); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0a1a 0%, #1a0f2e 50%, #0d0820 100%);
+            min-height: 100vh;
+            color: #e5e7eb;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 24px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .logo-container img {
+            height: 100px;
+            filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.6)) drop-shadow(0 0 40px rgba(236, 72, 153, 0.3));
+        }
+
+        header h1 {
+            font-size: 52px;
+            font-weight: 900;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2.5s ease-in-out infinite;
+            letter-spacing: 2px;
+        }
+
+        .promo-tag {
+            font-size: 32px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #ec4899 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .promo-desc {
+            font-size: 16px;
+            color: #c4b5fd;
+            letter-spacing: 0.5px;
+        }
+
+        .shop-container {
+            display: grid;
+            gap: 40px;
+        }
+
+        .category-section {
+            background: rgba(20, 12, 40, 0.5);
+            border: 2px solid rgba(168, 85, 247, 0.3);
+            border-radius: 16px;
+            padding: 32px 20px;
+            backdrop-filter: blur(15px);
+            animation: pulse-border 3s ease-in-out infinite;
+        }
+
+        .category-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .category-title .icon {
+            font-size: 32px;
+        }
+
+        .category-title h2 {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0;
+        }
+
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 16px;
+        }
+
+        .product-card {
+            background: linear-gradient(135deg, rgba(20, 12, 40, 0.8) 0%, rgba(30, 15, 50, 0.8) 100%);
+            border: 2px solid rgba(168, 85, 247, 0.4);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            transform: translateY(0);
+            position: relative;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(236, 72, 153, 0.2), transparent);
+            transition: left 0.5s;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .product-card:hover::before {
+            left: 100%;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(236, 72, 153, 0.8);
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.4), 0 0 60px rgba(236, 72, 153, 0.2);
+        }
+
+        .product-image {
+            position: relative;
+            overflow: hidden;
+            height: 160px;
+            background: rgba(79, 70, 229, 0.1);
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: linear-gradient(135deg, #ec4899 0%, #a855f7 100%);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 12px;
+            box-shadow: 0 0 15px rgba(236, 72, 153, 0.5);
+            z-index: 2;
+        }
+
+        .product-info {
+            padding: 16px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .product-name {
+            color: #e5e7eb;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+        }
+
+        .price-section {
+            margin-bottom: 12px;
+        }
+
+        .original-price {
+            color: #a78bfa;
+            font-size: 12px;
+            text-decoration: line-through;
+            margin-bottom: 4px;
+        }
+
+        .discount-price {
+            background: linear-gradient(135deg, #06b6d4 0%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .buy-button {
+            width: 100%;
+            background: linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #06b6d4 100%);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+        }
+
+        .buy-button:hover {
+            box-shadow: 0 0 30px rgba(236, 72, 153, 0.6), 0 0 60px rgba(6, 182, 212, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .buy-button:active {
+            transform: scale(0.98);
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 36px;
+            }
+
+            .logo-container img {
+                height: 80px;
+            }
+
+            .promo-tag {
+                font-size: 24px;
+            }
+
+            .items-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #a78bfa;
+            font-size: 13px;
+            margin-top: 60px;
+            border-top: 2px solid rgba(168, 85, 247, 0.2);
+            letter-spacing: 0.5px;
+        }
+
+        footer strong {
+            color: #ec4899;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <img src="logo-krush.png" alt="RedeKrush Logo">
+            </div>
+            <h1>REDE KRUSH</h1>
+            <div class="promo-tag">30% OFF 🔥</div>
+            <p class="promo-desc">Loja Oficial - Aproveite os descontos por tempo limitado!</p>
+        </header>
+
+        <div class="shop-container" id="shop"></div>
+
+        <footer>
+            <strong>⚠️ Promoção por tempo limitado.</strong> Aproveite antes que acabe! 🚀
+        </footer>
+    </div>
+
+    <script>
+        // ⚠️ SUBSTITUA ESTE LINK COM SEU CONVITE DO DISCORD
+        const DISCORD_INVITE = "https://discord.gg/seuserver";
+
+        const products = [
+            {
+                category: "VIPs",
+                icon: "💎",
+                items: [
+                    { name: "VIP Mensal", original: 19.99, discount: 13.99, image: "https://via.placeholder.com/200x200?text=VIP" },
+                    { name: "MVP Mensal", original: 34.99, discount: 24.49, image: "https://via.placeholder.com/200x200?text=MVP" },
+                    { name: "MVP+ Mensal", original: 74.99, discount: 52.49, image: "https://via.placeholder.com/200x200?text=MVP+" },
+                    { name: "KRUSH Mensal", original: 299.99, discount: 209.99, image: "https://via.placeholder.com/200x200?text=KRUSH" }
+                ]
+            },
+            {
+                category: "Estrelas",
+                icon: "⭐",
+                items: [
+                    { name: "5.000 Estrelas", original: 19.99, discount: 13.99, image: "https://via.placeholder.com/200x200?text=5K" },
+                    { name: "10.000 Estrelas", original: 29.99, discount: 20.99, image: "https://via.placeholder.com/200x200?text=10K" },
+                    { name: "15.000 Estrelas", original: 39.99, discount: 27.99, image: "https://via.placeholder.com/200x200?text=15K" },
+                    { name: "25.000 Estrelas", original: 49.99, discount: 34.99, image: "https://via.placeholder.com/200x200?text=25K" },
+                    { name: "50.000 Estrelas", original: 74.99, discount: 52.49, image: "https://via.placeholder.com/200x200?text=50K" },
+                    { name: "100.000 Estrelas", original: 99.99, discount: 69.99, image: "https://via.placeholder.com/200x200?text=100K" }
+                ]
+            },
+            {
+                category: "Combos",
+                icon: "📦",
+                items: [
+                    { name: "MVP+ + 50.000 Estrelas", original: 119.99, discount: 83.99, image: "https://via.placeholder.com/200x200?text=COMBO" }
+                ]
+            },
+            {
+                category: "Outros",
+                icon: "🎁",
+                items: [
+                    { name: "Desbanimento", original: 79.99, discount: 55.99, image: "https://via.placeholder.com/200x200?text=Unban" },
+                    { name: "Chave Valentine", original: 29.99, discount: 20.99, image: "https://via.placeholder.com/200x200?text=Valentine" },
+                    { name: "Pacote Rubi", original: 59.99, discount: 41.99, image: "https://via.placeholder.com/200x200?text=Rubi" },
+                    { name: "Chave de Asas", original: 34.99, discount: 23.99, image: "https://via.placeholder.com/200x200?text=Wings" }
+                ]
+            }
+        ];
+
+        const shopContainer = document.getElementById('shop');
+
+        products.forEach(section => {
+            const categoryDiv = document.createElement('div');
+            categoryDiv.className = 'category-section';
+
+            const titleDiv = document.createElement('div');
+            titleDiv.className = 'category-title';
+            titleDiv.innerHTML = `
+                <span class="icon">${section.icon}</span>
+                <h2>${section.category}</h2>
+            `;
+            categoryDiv.appendChild(titleDiv);
+
+            const itemsGrid = document.createElement('div');
+            itemsGrid.className = 'items-grid';
+
+            section.items.forEach(item => {
+                const discount = Math.round(((item.original - item.discount) / item.original) * 100);
+                
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <div class="product-image">
+                        <img src="${item.image}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/200x200?text=${encodeURIComponent(item.name)}'">
+                        <div class="discount-badge">-${discount}%</div>
+                    </div>
+                    <div class="product-info">
+                        <p class="product-name">${item.name}</p>
+                        <div class="price-section">
+                            <p class="original-price">R$ ${item.original.toFixed(2)}</p>
+                            <p class="discount-price">R$ ${item.discount.toFixed(2)}</p>
+                        </div>
+                        <button class="buy-button" onclick="window.open('${DISCORD_INVITE}', '_blank')">
+                            Comprar no Discord
+                        </button>
+                    </div>
+                `;
+
+                itemsGrid.appendChild(card);
+            });
+
+            categoryDiv.appendChild(itemsGrid);
+            shopContainer.appendChild(categoryDiv);
+        });
+    </script>
+</body>
+</html>
